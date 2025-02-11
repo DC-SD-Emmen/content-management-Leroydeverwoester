@@ -20,12 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
-
+        
         if ($stmt->execute()) {
             echo "Registration success!";
-         } else {
+        } else {
             echo "Database connection failed.";
         }
+        
     }
 }
 
@@ -34,16 +35,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Drenthe College docker web server</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Registration form</h1>
-
-    <form action="index.php" method="post">
+    <div class="header">
+        <h1>Register</h1>
+    </div>
+    <div class="container">
+        <p>Please fill in this form to create an account.</p> <br>
+        <form action="index.php" method="post">
         Username: <br>
         <input type="text" name="username" placeholder="Enter your username" required> <br> <br>
         Password: <br>
         <input type="password" name="password" placeholder="Enter your password" required> <br> <br>
         <input type="submit" value="Register">
+
+        <p>Already have an account? <a href="login.php">Login here</a></p>
+
+</div>
     </form>
 </body>
 </html>
+
+
