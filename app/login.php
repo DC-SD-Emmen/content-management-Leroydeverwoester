@@ -62,6 +62,12 @@ function verify_password() {
 </head>
 
 <body>
+    
+<div class='boxLogin'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
+    </div>
     <div class="header">
         <h1>Login</h1>
     </div>

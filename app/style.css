@@ -18,6 +18,66 @@
     font-size: 24px;
 }
 
+.box {
+    position: fixed;
+    top: 0;
+    transform: rotate(80deg); 
+    left: 1000;
+    z-index: -1;
+}
+
+.boxIndex {
+    position: fixed;
+    top: 0;
+    transform: rotate(80deg); 
+    left: 100;
+    z-index: -1;
+}
+
+.boxLogin {
+    position: fixed;
+    top: 0;
+    transform: rotate(80deg); 
+    left: 100;
+    z-index: -1;
+}
+
+.wave {
+    position: absolute;
+    opacity: .4;
+    width: 1700px;
+    height: 2000px;
+    margin-left: 550px;
+    margin-top: -1450px;
+    border-radius: 43%;
+    z-index: -1;
+}
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
+  }
+
+  .wave.-one {
+    animation: rotate 7000ms infinite linear;
+    opacity: .1;
+    background: rgba(87, 75, 132, 0.646);
+    filter: drop-shadow(0 0 10px #00ddff51);
+  }
+  
+  .wave.-two {
+    animation: rotate 3000ms infinite linear;
+    opacity: .1;
+    background: rgba(19, 127, 154, 0.707);
+    filter: drop-shadow(0 0 10px #1e00ff6b);
+  }
+  
+  .wave.-three {
+    animation: rotate 7500ms infinite linear;
+    background-color: #6b6b6b9c;
+    filter: drop-shadow(0 0 10px #07a6db6a);
+  }
+
 .logout {
     position: absolute;
     right: 20px;
@@ -33,7 +93,7 @@ body {
     background: linear-gradient(120deg, #38393b, #25293d, #1c1d21);
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
-    color: #000000;
+    color: #ffffff;
 }
 
 @keyframes gradientBG {
@@ -43,14 +103,14 @@ body {
 }
 
 .container {
-    background: rgb(230, 230, 230);
+    background: rgb(39, 39, 39);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     width: 350px;
     text-align: center;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.2s ease-in-out;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.34));
     margin: 0 auto;
     margin-top: 100px;
@@ -58,16 +118,17 @@ body {
 
 a{
     text-decoration: none;
-    color: rgb(0, 51, 255);
+    color: #007bff;
     font-style: bold;
+    text-decoration: underline;
 }
 
 a:hover{
-    color: rgb(0, 106, 255);
+    color: #2499d4;
 }
 
 a:active{
-    color: rgb(0, 106, 255);
+    color: #2f58b1;
     transform: scale(0.98);
     transition: transform 0.1s;
 }
@@ -111,7 +172,7 @@ input[type="text"], input[type="password"] {
 }
 
 input[type="submit"] {
-    background: #00ff2f;
+    background: #003cbd;
     color: white;
     border: none;
     padding: 10px;
@@ -122,11 +183,11 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: rgb(110, 255, 115);
+    background: #2c5abc;
 }
 
 input[type="submit"]:active {
-    background: rgb(138, 255, 142);
+    background: #2c5abc;
     transform: scale(0.98);
     transition: transform 0.1s;
 }

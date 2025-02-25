@@ -23,8 +23,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     exit;
 }
 
-echo "U bent ingelogd.";
-
 ?>
 
 
@@ -37,15 +35,16 @@ echo "U bent ingelogd.";
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    
-    <div class="header">
-    <h1>Welkom op de user pagina</h1>
+<div class='box'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
     </div>
     <div class="container">
+    <h1>Welcome <?php echo $_SESSION['username']; ?></h1>
+    <p>You are now logged in.</p>
+    <br>
         <a href="user.php?action=logout">Log out</a>
-    
-
-</div>
-    </form>
+    </div>
 </body>
 </html>

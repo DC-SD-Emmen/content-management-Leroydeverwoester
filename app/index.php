@@ -39,8 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Register</h1>
+    <div class='boxIndex'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
     </div>
     <div class="container">
         <p>Please fill in this form to create an account.</p> <br>
