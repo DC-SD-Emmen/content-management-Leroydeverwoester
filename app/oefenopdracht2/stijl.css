@@ -1,0 +1,561 @@
+/* General Reset */
+
+#gradient-canvas {
+  width: 100%;
+  height: 300%;
+  --gradient-color-1: #000000;
+  --gradient-color-2: #152b6b;
+  --gradient-color-3: #1622a2;
+  --gradient-color-4: #272755;
+  position: absolute;
+  z-index: -2;
+}
+
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(255 255 255 / 26%);
+    border-radius: 10px;
+    border: 1px solid rgb(255 255 255 / 15%);
+    position: absolute;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 30px;
+    font-family: sans-serif;
+    padding: 30px 40px;
+      text-align: center;
+    line-height: 1.4;
+}
+* {
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    margin: 0;
+    /* height: 100vh; */
+    background-color: #000000;
+    background-size: 400% 400%;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+
+.backgroundBlur{
+    backdrop-filter: blur(10px);
+    background: rgba(39, 39, 39, 0.52);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(153, 153, 153, 0.474);
+    backdrop-filter: blur(10px);
+    width: 650px;
+    text-align: center;
+    animation: fadeIn 0.2s ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(43, 0, 255, 0.34));
+    margin: 0 auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    border-radius: 10px;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.addGame{
+  background: rgba(39, 39, 39, 0.52);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.474);
+  backdrop-filter: blur(10px);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.34));
+  margin: 0 auto;
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+  border-radius: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: #007bff;
+    font-style: bold;
+    text-decoration: underline;
+}
+
+a:hover{
+    color: #2499d4;
+}
+
+a:active{
+    color: #2f58b1;
+    transform: scale(0.98);
+    transition: transform 0.1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #fff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background: #003cbd;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: #2c5abc;
+}
+
+input[type="submit"]:active {
+    background: #2c5abc;
+    transform: scale(0.98);
+    transition: transform 0.1s;
+}
+
+input {
+  animation: popIn 0.3s ease-in-out;
+}
+
+  .gridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #ffffff;
+    overflow: hidden;
+   
+}
+
+#add_game2,
+#libraryLibrary {
+    margin-right: 20px;
+    cursor: pointer;
+    font-family: "Verdana";
+    border-bottom: #00aaff;
+    font-size: 22px;
+    color: #00aaff;
+    border-bottom: 4px #00aaff solid;
+    border-image: linear-gradient(to right, #00aaff, #ffffff) 1;
+    border-image-slice: 1;
+    animation: borderGradient 5s infinite;
+}
+
+@keyframes borderGradient {
+  0% {
+    border-image-source: linear-gradient(to right, #00aaff, #ffffff);
+  }
+  50% {
+    border-image-source: linear-gradient(to right, #ffffff, #00aaff);
+  }
+  100% {
+    border-image-source: linear-gradient(to right, #00aaff, #ffffff);
+  }
+}
+
+
+#Library2:hover,
+#storeLibrary:hover,
+#communityLibrary:hover,
+#add_gameLibrary:hover {
+    color: #ffffff;
+
+}
+
+#Buttonz {
+  padding: 10px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+#Buttonz:hover {
+  transform: scale(1.1);
+}
+#Library2,
+#storeLibrary,
+#communityLibrary,
+#add_gameLibrary {
+    margin-right: 20px;
+    cursor: pointer;
+    font-family: "MotivaSansBold";
+    font-size: 22px;
+    color: #dcdedf;
+
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #66c0f4;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"],
+input[type="password"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #386ecb;
+  border-radius: 4px;
+  background-color: #0000005e;
+  color: #c7d5e0;
+  box-sizing: border-box;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+input[type="submit"] {
+  background-color: #386ecb;
+  color: #ffffff;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #5380cd;
+  transition: background-color 0.3s;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: #c7d5e0;
+}
+
+table,
+th,
+td {
+  border: 1px solid #66c0f4;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #2a475e;
+  color: #66c0f4;
+}
+
+tr:nth-child(even) {
+  background-color: #1b2838;
+}
+
+tr:hover {
+  background-color: #3c638e;
+}
+
+#ratingValue {
+  font-weight: bold;
+  color: #66c0f4;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  background-color: #386ecb;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s;
+  animation: popIn 0.3s ease-in-out;
+}
+
+.custom-file-upload:hover {
+  background-color: #5380cd;
+}
+.gameGrid{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.game-boxes {
+  row-gap: 20px;
+  column-gap: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  overflow-y: auto;
+  max-height: 85vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #1b2838;
+  padding-top: 10px;
+  padding: 10px;
+  padding-right: 20px;
+}
+
+#imagetitle {
+  width: 280px;
+  height: 385px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.724);
+  object-fit:fill;
+  border-radius: 8px;
+  border: 3px solid #323232;
+  
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#imagetitle {
+  animation: popIn 0.8s ease-in-out;
+}
+.game-box:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.game-box:active {
+  transform: scale(0.98);
+  transition: transform 0.05s;
+}
+
+.game-box {
+  transition: transform 0.5s ease;
+  border-radius: 10px;
+}
+.game-box {
+  transition: transform 0.5s ease, margin-left 0.5s ease;
+  margin-left: -100%;
+}
+
+.game-boxes .game-box {
+  animation: slideInGameBox 0.5s forwards ease-in-out;
+}
+
+@keyframes slideInGameBox {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 0;
+  }
+}
+
+.sidebar {
+  margin-left: -250px; /* Start off-screen */
+  height: 80vh; /* Set height to viewport height */
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.474);
+  backdrop-filter: blur(10px);
+  width: 200px;
+  animation: slideIn 0.8s forwards ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.34));
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin;
+  scrollbar-color: #000000b4 #302d2d44;
+}
+
+@keyframes slideIn {
+  from {
+    margin-left: -250px; /* Start off-screen */
+  }
+  to {
+    margin-left: 0; /* End at the desired position */
+  }
+}
+
+#imageside {
+  width: 30px;
+  height: 30px;
+}
+
+.game-title {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+}
+
+.game-image {
+  display: inline-block;
+  animation: popIn 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+
+.container {
+  background: rgba(39, 39, 39, 0.377);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.474);
+  backdrop-filter: blur(10px);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.34));
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.game-image2 {
+  width: 400px;
+  height: 10px;
+}
+
+.game-bar {
+  margin-bottom: 5px;
+  animation: popIn 0.3s ease-in-out;
+}
+
+/* Game Link Container */
+.gameLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  background: linear-gradient(180deg, #6060603c, #0000003e);
+  /* Initial gradient */
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.4s ease, transform 0.3s ease;
+  overflow: hidden;
+  /* Ensures the hover effect stays contained */
+  display: block;
+}
+
+/* Hover Effect for the Link */
+.gameLink:hover {
+  background: linear-gradient(180deg, #6060603c, #0099ff5d);
+  /* New gradient on hover */
+  transform: scale(1.05);
+  /* Slight scaling effect */
+  
+}
+
+.gameLink:active {
+  background: linear-gradient(180deg, #6060603c, #0099ff5d);
+  /* New gradient on hover */
+  transform: scale(0.98);
+  /* Slight scaling effect */
+  
+}
+
+/* Game Image Styling */
+.game-image#imageside {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 1px;
+  transition: transform 0.3s ease, border 0.3s ease;
+  border: 2px solid #3a475e;
+  /* Initial border color */
+}
+
+.gameLink:hover .game-image#imageside {
+  transform: scale(1.1);
+  /* Image scales slightly */
+  border: 2px solid #66c0f4;
+  /* Border changes to blue on hover */
+}
+
+/* Game Title Styling */
+.game-title {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #c7d5e0;
+  /* Initial text color */
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* Smooth text transition */
+}
+
+.gameLink:hover .game-title {
+  color: #66c0f4;
+  /* Changes to Steam blue on hover */
+  transform: translateY(-5px);
+  /* Slight upward movement */
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 1370px) {
+  .game-boxes {
+      grid-template-columns: auto auto auto;
+  }
+}
+
+@media only screen and (max-width: 1130px) {
+  .game-boxes {
+      grid-template-columns: auto auto;
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  .game-boxes {
+      grid-template-columns: auto;
+  }
+}

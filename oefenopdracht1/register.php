@@ -37,25 +37,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Drenthe College docker web server</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="oefenopdracht2/stijl.css">
+    <link rel="stylesheet" type="text/css" href="oefenopdracht2/steam_style.css">
 </head>
 <body>
-    <div class='boxIndex'>
-        <div class='wave -one'></div>
-        <div class='wave -two'></div>
-        <div class='wave -three'></div>
-    </div>
+ 
+<div class="gridItem">
+
+    <div id=libraryLibrary> <p id="Buttonz" onclick="window.location.href='index.php'">STORE</p> </div>
+    <div id=storeLibrary> <p id="Buttonz" onclick="window.location.href='library.php'">LIBRARY</p> </div>
+    <div id=communityLibrary> <p id="Buttonz"> COMMUNITY</p> </div>
+    <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='add_game.php'">ADD GAME</p> </div>
+    <div id=Register> <p id="Buttonz" onclick="window.location.href='oefenopdracht1/index.php'">REGISTER</p> </div>
+</div>
     <div class="container">
-        <p>Please fill in this form to create an account.</p> <br>
+        <p>Please fill in this form to create a new account.</p> <br>
         <form action="index.php" method="post">
         Username: <br>
-        <input type="text" name="username" placeholder="Enter your username" required> <br> <br>
+        <input type="text" name="username" placeholder="Create new username" required> <br> <br>
         Password: <br>
-        <input type="password" name="password" placeholder="Enter your password" required> <br> <br>
+        <input type="password" name="password" placeholder="Create new password" required> <br> <br>
         <input type="submit" value="Register">
 
         <p>Already have an account? <a href="login.php">Login here</a></p>
 
 </div>
+
     </form>
 </body>
 </html>
