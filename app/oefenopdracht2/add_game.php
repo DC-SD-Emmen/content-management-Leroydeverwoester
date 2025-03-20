@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+spl_autoload_register(function($class){
+    include "classes/" . $class . ".php";
+});
+
+
+
+
+$db = new Database();
+
+$gameManager = new GameManager($db);
+
+if(isset($_POST['submit'])) {
+
+    $gameManager->file_upload($_FILES["fileToUpload"]);
+    $gameManager->addGame($_POST, $_FILES["fileToUpload"]['name']);
+}
+
+$games = $gameManager->getGames();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,33 +34,15 @@
 
 <canvas id="gradient-canvas"></canvas>
     <div class="gridLibrary">
-        <div class="gridItem">
+    <div class="gridItem">
         <div id=Library2> <p id="Buttonz" onclick="window.location.href='index.php'">LIBRARY</p> </div>
             <div id=Library2> <p id="Buttonz" onclick="window.location.href='store.php'">STORE</p> </div>
             <div id=add_game2> <p id="Buttonz" onclick="window.location.href='add_game.php'">ADD GAME</p> </div>
-            <div id=communityLibrary><p id="Buttonz" onclick="window.location.href='register.php'">REGISTER</p> </div>
+            <div id=communityLibrary><p id="Buttonz" onclick="window.location.href='login.php'">LOGIN</p> </div>
             <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='user.php'">ACCOUNT</p> </div>
     </div>
 
-    <?php
 
-        spl_autoload_register(function($class){
-            include "classes/" . $class . ".php";
-        });
-
-        $db = new Database();
-
-        $gameManager = new GameManager($db);
-
-        if(isset($_POST['submit'])) {
-
-            $gameManager->file_upload($_FILES["fileToUpload"]);
-            $gameManager->addGame($_POST, $_FILES["fileToUpload"]['name']);
-        }
-
-        $games = $gameManager->getGames();
-
-    ?>
 
     <form class='addGame' method='POST' enctype="multipart/form-data">
         <div class="addGamediv">
@@ -48,7 +54,7 @@
         
         <label for="platform">Platform:</label>
         <select id="platform" name="platform">
-            <option value="PC_(Steam)">PC (Steam)</option>
+            <option value="PC">PC</option>
             <option value="PS5">Playstation (PS5)</option>
             <option value="PS4">Playstation (PS4)</option>
             <option value="PS3">Playstation (PS3)</option>
@@ -103,44 +109,10 @@
         <label for="file" class="custom-file-upload">Upload File</label>
 
 
-        <input id="submit" type='submit' name='submit'> 
+        <input id="submit" value='Submit' type='submit' name='submit'> 
         </div>
     </form>
 
-    <!-- <table border= "1">
-
-        <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Platform</th>
-            <th>Release year</th>
-            <th>Rating</th>
-            <th>Developer</th>
-            <th>Description</th>
-            <th>Image</th>
-        </tr> -->
-
-        <?php
-
-            // foreach($games as $game) {
-            //     echo "<tr>";
-            //     echo "<td>" . $game-> getTitle() . "</td>";
-            //     echo "<td>" . $game-> getGenre() . "</td>";
-            //     echo "<td>" . $game-> getPlatform() . "</td>";
-            //     echo "<td>" . $game-> getRelease_year() . "</td>";
-            //     echo "<td>" . $game-> getRating() . "</td>";
-            //     echo "<td>" . $game-> getDeveloper() . "</td>";
-            //     echo "<td>" . $game-> getDescription() . "</td>";
-            //     echo "<td>" . $game-> getImage() . "</td>";
-            //     echo "</tr>";
-            
-            // }
-
-        ?>
-    <!-- </table> -->
-
-
-    
 </body>
 </html>
 

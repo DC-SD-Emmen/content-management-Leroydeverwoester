@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 spl_autoload_register(function($class){
     include "classes/" . $class . ".php";
@@ -21,25 +21,37 @@ class GameManager {
         return $stmt->fetch();
     }
 
-    public function addToWishlist($id) {
-        $stmt = $this->conn->prepare("INSERT INTO wishlist (game_id) VALUES (:id)");
+    public function remove($id) {
+        // First delete related rows in user_games table
+        $stmt = $this->conn->prepare("DELETE FROM user_games WHERE game_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        // Then delete related rows in bought_games table
+        $stmt = $this->conn->prepare("DELETE FROM bought_games WHERE game_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        // Then delete the game
+        $stmt = $this->conn->prepare("DELETE FROM games WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 
+
     public function addGame($data, $image) {
-        $title = htmlspecialchars($data['title']);
-        $genre = htmlspecialchars($data['genre']);
-        $platform = $data['platform'];
-        $release_year = $data['release_year'];
-        $rating = $data['rating'];
-        $developer = htmlspecialchars($data['developer']);
-        $description = htmlspecialchars($data['description']);
+        $title = isset($data['title']) ? htmlspecialchars($data['title']) : '';
+        $genre = isset($data['genre']) ? htmlspecialchars($data['genre']) : '';
+        $platform = isset($data['platform']) ? $data['platform'] : '';
+        $release_year = isset($data['release_year']) ? $data['release_year'] : '';
+        $rating = isset($data['rating']) ? $data['rating'] : '';
+        $developer = isset($data['developer']) ? htmlspecialchars($data['developer']) : '';
+        $description = isset($data['description']) ? htmlspecialchars($data['description']) : '';
         
         //regex statement wordt aangemaakt / klaargezet
-        $titleRegex = '/[A-Z][a-z]* ?([A-Z]?[a-z]*|[1-9])? ?([A-Z]?[a-z]*|[1-9])?/';
-        $genreRegex = '/[A-Z][a-z]*/';
-        $developerRegex = "/[A-Z][a-z]*/";
+        $titleRegex = '/^[\w\s,.-:®™()]+$/';
+        $genreRegex = '/^[\w\s,.-:®™]+$/';
+        $developerRegex = '/^[\w\s,.-:()]+$/';
      
         echo"<br>";
        
@@ -75,14 +87,23 @@ class GameManager {
                 //statement uitvoeren (execute) en melding geven of het goed is gegaan
                 $stmt->execute();
                 echo "data inserted successfully<br><br>";
-            } 
-            //melding als het niet goed ging
-            catch (PDOException $e) {
-                echo "Insert data failed: " . $e->getMessage();
-                echo "<br><br>";
+                } 
+                //melding als het niet goed ging 
+                catch (PDOException $e) {
+                    echo "Insert data failed: " . $e->getMessage();
+                    echo "<br><br>";
+                }
             }
         }
-    }
+    
+        public function searchGames($keyword) {
+            $keyword = "%" . htmlspecialchars($keyword) . "%";
+            $stmt = $this->conn->prepare("SELECT * FROM games WHERE title LIKE :keyword OR genre LIKE :keyword OR developer LIKE :keyword");
+            $stmt->bindParam(':keyword', $keyword);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Game');
+            return $stmt->fetchAll();
+        }
 
     //haal data van alle games terug uit de database
     public function getGames($game_id = null) {
@@ -135,14 +156,14 @@ class GameManager {
         }
 
     // Check file size
-        if ($file["size"] > 500000) {
+        if ($file["size"] > 50000000) {
             echo "Sorry, your file is too large.";
             $uploadOk = 0;
         }
 
     // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-            echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "webp" ) {
+            echo "Sorry, only JPG, JPEG, PNG & WEBP files are allowed.";
             $uploadOk = 0;
         }
 
@@ -160,5 +181,75 @@ class GameManager {
         }
     }
 
+
+    function get_data_by_id($id) {
+        try {
+            // SQL-query aanpassen om een specifieke game te selecteren
+            $stmt = $this->conn->prepare("SELECT * FROM game WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT); // Bind het ID aan de query
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC); // Haal één enkele rij op
+
+                // Maak een nieuw game-object
+                $game = new Game();
+                $game->setTitle($row["title"]);
+                $game->setImage($row["image"]);
+                $game->setGenre($row["genre"]);
+                $game->setPlatform($row["platform"]);
+                $game->setRelease_year($row["release_year"]);
+                $game->setRating($row["rating"]);
+                $game->setDescription($row["description"]);
+                $game->setDeveloper($row["developer"]);
+
+                // Haal data op
+                $titel = $game->getTitle();
+                $afbeeldingPath = $game->getImage();
+                $genre = $game->getGenre();
+                $platform = $game->getPlatform();
+                $Release_year = $game->getRelease_year();
+                $rating = $game->getRating();
+                $description = $game->getDescription();
+                $developer = $game->getDeveloper();
+    // Toon de gegevens van de game
+                echo '<div>';
+                echo '<img class="normalImage" src="uploads/' . htmlspecialchars($afbeeldingPath) . '">';
+                echo '<h1>' . htmlspecialchars($titel) . '</h1>';
+                echo '<p>Genre: ' . htmlspecialchars($genre) . '</p>';
+                echo '<p>Platform: ' . htmlspecialchars($platform) . '</p>';
+                echo '<p>Release Year: ' . htmlspecialchars($Release_year) . '</p>';
+                echo '<p>Rating: ' . htmlspecialchars($rating) . '</p>';
+                echo '<p>Description: ' . htmlspecialchars($description) . '</p>';
+                echo '<p>Developer: ' . htmlspecialchars($developer) . '</p>';
+                echo '</div>';
+            } else {
+                echo "Geen resultaten gevonden.";
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+
+public function searchBoughtGames($searchTerm, $user_id) {
+    $query = "
+        SELECT games.title, games.image, games.id
+        FROM games
+        INNER JOIN bought_games ON games.id = bought_games.game_id
+        WHERE bought_games.user_id = :user_id AND games.title LIKE :searchTerm;
+    ";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%');
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+
 }
 ?>
+
