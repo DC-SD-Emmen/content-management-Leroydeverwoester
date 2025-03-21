@@ -14,7 +14,6 @@
     $userManager = new UserManager($database->getConnection());
     $user = $userManager->getUser($_SESSION['username']);
 
-
     if ($user === false) {
         echo "User not found!";
         exit;
@@ -25,7 +24,6 @@
         $newEmail = htmlspecialchars($_POST['email'] ?? '');
         $newPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        // Check if the new username or email already exists
         $stmt = $database->getConnection()->prepare("SELECT COUNT(*) FROM users WHERE (username = :username OR email = :email) AND username != :currentUsername");
         $stmt->bindParam(':username', $newUsername);
         $stmt->bindParam(':email', $newEmail);
@@ -40,7 +38,6 @@
             exit;
         }
         
-        // Verify current password
         $currentPassword = $_POST['current_password'] ?? '';
         if (!$user || !isset($user['password']) || !password_verify($currentPassword, $user['password'])) {
             $_SESSION['error'] = "Current password is incorrect!";
@@ -50,7 +47,6 @@
 
         $_SESSION['username'] = $newUsername;
 
-        // Update the user's details in the database
         $stmt = $database->getConnection()->prepare("UPDATE users SET username = :username, email = :email, password = :password WHERE username = :currentUsername");
         $stmt->bindParam(':username', $newUsername);
         $stmt->bindParam(':email', $newEmail);
@@ -77,13 +73,13 @@
     <link rel="stylesheet" href="stijl.css">
 </head>
 <body>
-<canvas id="gradient-canvas"></canvas>
+    <canvas id="gradient-canvas"></canvas>
 
     <div class="gridItem">
 
         <div id=communityLibrary> <p id="Buttonz" onclick="window.location.href='index.php'">LIBRARY</p> </div>
         <div id=storeLibrary> <p id="Buttonz" onclick="window.location.href='store.php'">STORE</p> </div>
-        
+
             <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'Admin'): ?>
                 <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='add_game.php'">ADD GAME</p> </div>
             <?php endif; ?>
@@ -114,7 +110,6 @@
             <a class="deleteAccount" href="register.php?action=deleteAccount" onclick="return confirm('Are you sure you want to delete your account?');">Delete Account</a>
         </form>
     </div>
-
 </body>
 </html>
 

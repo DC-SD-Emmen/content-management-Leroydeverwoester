@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     spl_autoload_register(function($class){
@@ -8,7 +7,6 @@
 
     $database = new Database();
     $userManager = new UserManager($database->getConnection());
-
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -32,9 +30,7 @@
         $searchTerm = htmlspecialchars($_GET['search']);
         $games = $gameManager->searchGames($searchTerm);
     }
-
 ?>
-
 
 <html>
 <head>
@@ -42,16 +38,17 @@
     <link rel="stylesheet" href="stijl.css">
     <link rel="stylesheet" href="steam_style.css">
 </head>
-
 <body>
     <canvas id="gradient-canvas"></canvas>
 
     <div class="gridItem">
         <div id=communityLibrary> <p id="Buttonz" onclick="window.location.href='index.php'">LIBRARY</p> </div>
         <div id=storeLibrary> <p id="Buttonz" onclick="window.location.href='store.php'">STORE</p> </div>
+
         <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'Admin'): ?>
             <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='add_game.php'">ADD GAME</p> </div>
-                <?php endif; ?>
+        <?php endif; ?>
+
         <div id=libraryLibrary> <p id="Buttonz" onclick="window.location.href='login.php'">LOGIN</p> </div>
         <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='user.php'">ACCOUNT</p> </div>
 
@@ -71,9 +68,6 @@
                 <p>New user? <a href="register.php">Register here</a></p>
             </form>
     </div>
-
-   
-   
 </body>
 </html>
 

@@ -31,14 +31,15 @@
 </head>
 <body>
     <canvas id="gradient-canvas"></canvas>
-
+    
     <div class="gridItem">
-
             <div id=communityLibrary> <p id="Buttonz" onclick="window.location.href='index.php'">LIBRARY</p> </div>
             <div id=storeLibrary> <p id="Buttonz" onclick="window.location.href='store.php'">STORE</p> </div>
+
             <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'Admin'): ?>
-            <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='add_game.php'">ADD GAME</p> </div>
-                <?php endif; ?>
+                <div id=add_gameLibrary> <p id="Buttonz" onclick="window.location.href='add_game.php'">ADD GAME</p> </div>
+            <?php endif; ?>
+
             <div id=communityLibrary><p id="Buttonz" onclick="window.location.href='login.php'">LOGIN</p> </div>
             <div id=libraryLibrary> <p id="Buttonz" onclick="window.location.href='user.php'">ACCOUNT</p> </div>
     </div>
@@ -71,40 +72,33 @@
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();
     $wishlistGames = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         echo "<h2>" . htmlspecialchars($_SESSION['username']) . "'s Wishlist</h2>";
         
         echo "<div class='wishlistgrid'>";
+            if (count($wishlistGames) > 0) {
+                echo "<ul>";
+                    foreach ($wishlistGames as $game) {
+                        echo "<div class='wishlistColumn'>";
+                            echo '<a href="game_details.php?id=' . urlencode($game['id']) . '">';
+                            echo '<img id="imagetitle" src="uploads/' . htmlspecialchars($game['image']) . '" alt="' . htmlspecialchars($game['title']) . '"></a>';
 
-    if (count($wishlistGames) > 0) {
-            echo "<ul>";
-        foreach ($wishlistGames as $game) {
-            echo "<div class='wishlistColumn'>";
-            echo '<a href="game_details.php?id=' . urlencode($game['id']) . '">';
-            echo '<img id="imagetitle" src="uploads/' . htmlspecialchars($game['image']) . '" alt="' . htmlspecialchars($game['title']) . '"></a>';
-            echo "<div class='wish-info'>";
-            echo "<li class='wishtitle'>" . htmlspecialchars($game['title']) . "</li> " . "<br>"; 
-            
-            echo "<li>" . htmlspecialchars($game['developer']) . "</li>" . "<br>";
-            echo "<li class='game-release-year'>" . htmlspecialchars($game['release_year']) . "</li> <br>"; 
-            echo '<li class="game-rating">Rating: ' . number_format($game['rating'], 1) . '/10</li>' ; 
-            echo '<p class="game-genre">Genre: ' . htmlspecialchars($game['genre']) . '</p> <br>';
-            echo '<a href="wishlist.php?action=remove_from_wishlist&game_id=' . urlencode($game['id']) . '" class="add_to_wishlist">Remove 🗑️</a>';
-            echo '<a href="index.php?action=buy&game_id=' . urlencode($game['id']) . '" class="buy">Buy game 🛒</a>';
-            
-            echo "</div>";
-            echo "</div>";
-        
-        }
-        
-            echo "</ul>";
-            echo "</div>";
-            
-    } else {
-        echo "<p>Your wishlist is empty.</p>";
-    }
-
-
-
+                            echo "<div class='wish-info'>";
+                                echo "<li class='wishtitle'>" . htmlspecialchars($game['title']) . "</li> " . "<br>"; 
+                                echo "<li>" . htmlspecialchars($game['developer']) . "</li>" . "<br>";
+                                echo "<li class='game-release-year'>" . htmlspecialchars($game['release_year']) . "</li> <br>"; 
+                                echo '<li class="game-rating">Rating: ' . number_format($game['rating'], 1) . '/10</li>' ; 
+                                echo '<p class="game-genre">Genre: ' . htmlspecialchars($game['genre']) . '</p> <br>';
+                                echo '<a href="wishlist.php?action=remove_from_wishlist&game_id=' . urlencode($game['id']) . '" class="add_to_wishlist">Remove 🗑️</a>';
+                                echo '<a href="index.php?action=buy&game_id=' . urlencode($game['id']) . '" class="buy">Buy game 🛒</a>';
+                            echo "</div>";
+                        echo "</div>";
+                    }
+                echo "</ul>";
+            } else {
+                echo "<p>Your wishlist is empty.</p>";
+            }
+        echo "</div>";
 ?>
 
 <script src="background.js"></script>
